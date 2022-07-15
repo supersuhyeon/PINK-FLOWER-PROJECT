@@ -196,7 +196,7 @@ function initGame(){
     //creat pink and purple flowers and appendchild to field
 
     addItem('pinkflower',pinkflowerCount,'/img/pinkflower.png')
-    addItem('purpleflower',25,'/img/purpleflower.png')
+    addItem('purpleflower',10,'/img/purpleflower.png')
     addItem('redflower',10,'/img/redflower.png')
 
 }
