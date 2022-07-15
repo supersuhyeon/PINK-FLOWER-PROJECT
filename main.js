@@ -55,7 +55,6 @@ flowerPlayBtn.addEventListener('click',()=>{
 function gameStarted(){ 
     isstarted = true;
     initGame();
-    playBtnGone();
     changeStopBtn();
     showTimerandScoreBtn();
     autoTimerStart();
@@ -67,8 +66,10 @@ function gameStarted(){
 function gameStopped(){
     isstarted = false;
     autoTimerStop();
+    playBtnGone();
     showPopUpReplay('you want to replay?');
     stopSound(bgSound)
+    playSound(alertSound)
 }
 
 function finishgame(result){
