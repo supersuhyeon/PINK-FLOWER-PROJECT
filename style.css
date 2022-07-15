@@ -1,6 +1,7 @@
 body{
     text-align: center;
     background-color: black;
+    font-family: 'Amatic SC', cursive;
 
 }
 
@@ -108,4 +109,15 @@ display: block;
 font-size: 24px;
 color: white;
 margin-top: 10px;
+}
+
+.purpleflower,
+.pinkflower{
+    transition: transform 100ms ease-in;
+    cursor: pointer;
+}
+
+.purpleflower:hover,
+.pinkflower:hover{
+    transform: scale(1.1);
 }

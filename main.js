@@ -1,7 +1,7 @@
 //field variables
 const field = document.querySelector('.flowergame_field')
 const fieldSize = field.getBoundingClientRect();
-const pinkflowerCount = 5
+const pinkflowerCount = 10
 
 //flower main variables
 const flowerPlayBtn = document.querySelector('.playbtn')
@@ -36,6 +36,7 @@ replayBtn.addEventListener('click', ()=>{
 
 flowerPlayBtn.addEventListener('click',()=>{
     console.log('working!!')
+    
 
     //total 2 functions needed to be called
 
@@ -66,7 +67,7 @@ function gameStarted(){
 function gameStopped(){
     isstarted = false;
     autoTimerStop();
-    showPopUpReplay('replay?');
+    showPopUpReplay('you want to replay?');
     stopSound(bgSound)
 }
 
@@ -110,6 +111,8 @@ function FieldHandlerEvent(event){
     }else if(target.classList.contains('purpleflower')){
         playSound(purpleflowerSound);
         finishgame(false);
+    }else{
+        finishgame(false)
     }
 
    
@@ -193,7 +196,8 @@ function initGame(){
     //creat pink and purple flowers and appendchild to field
 
     addItem('pinkflower',pinkflowerCount,'/img/pinkflower.png')
-    addItem('purpleflower',20,'/img/purpleflower.png')
+    addItem('purpleflower',25,'/img/purpleflower.png')
+    addItem('redflower',10,'/img/redflower.png')
 
 }
 
