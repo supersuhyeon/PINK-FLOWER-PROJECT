@@ -114,13 +114,15 @@ margin-top: 10px;
 }
 
 .purpleflower,
-.pinkflower{
+.pinkflower,
+.redflower{
     transition: transform 100ms ease-in;
     cursor: pointer;
 }
 
 .purpleflower:hover,
-.pinkflower:hover{
+.pinkflower:hover,
+.redflower:hover{
     transform: scale(1.1);
 }
 

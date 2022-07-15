@@ -23,7 +23,7 @@ const alertSound = new Audio('/sound/alert.wav')
 
 
 //게임의 상태를 알고있어야할 변수
-let isstarted = false; //whether game started or not
+let isstarted = false; //whether game started or not 게임은 시작하지 않은단계에서 시작 초기값
 let score = 0; //점수 담을 공간
 let timer = ''; //timer 담을 공간
 
@@ -53,7 +53,7 @@ flowerPlayBtn.addEventListener('click',()=>{
 //when game started, when gamestopped make each function
 //1)게임시작전 초기화면
 function gameStarted(){ 
-    isstarted = true;
+    isstarted = true; //게임이 시작하고있는상태에서 클릭을 누르면 멈춰야함 그래서 isstarted = true = gamestopped()
     initGame();
     changeStopBtn();
     showTimerandScoreBtn();
@@ -64,7 +64,7 @@ function gameStarted(){
 
 //2)게임도중에 눌렀으면?
 function gameStopped(){
-    isstarted = false;
+    isstarted = false; //게임이 멈춰진상태에서 클릭을 누르면 재생되어야함 그래서 isstarted = false = gamestarted()
     autoTimerStop();
     playBtnGone();
     showPopUpReplay('you want to replay?');
@@ -92,7 +92,7 @@ function stopSound(sound){
 function FieldHandlerEvent(event){
     console.log(event)
 
-    if(!isstarted){
+    if(!isstarted){ //started가 false면 실행하지 말아라
         return
     }
 
