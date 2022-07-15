@@ -131,4 +131,8 @@ margin-top: 10px;
     .redflower{
         display: none;
     }
+
+    .popup .popup_replybtn{
+        color: black;
+    }
 }
