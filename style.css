@@ -136,4 +136,8 @@ margin-top: 10px;
         color: black;
         text-align: center;
     }
+    .fa-reply{
+        padding-right: 30px;
+        box-sizing: border-box;
+    }
 }
