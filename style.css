@@ -134,8 +134,5 @@ margin-top: 10px;
 
     .popup .popup_replybtn{
         color: black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 }
