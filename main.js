@@ -3,7 +3,7 @@ const field = document.querySelector('.flowergame_field')
 const fieldSize = field.getBoundingClientRect();
 const pinkflowerCount = 10
 
-//flower main variables
+//flower + popup variables
 const flowerPlayBtn = document.querySelector('.playbtn')
 const flowerTimer = document.querySelector('.timer')
 const flowerScore = document.querySelector('.score')
@@ -11,7 +11,7 @@ const popup = document.querySelector('.popup')
 const replayBtn = document.querySelector('.popup_replybtn')
 const popUpMessage = document.querySelector('.popup_message')
 
-//Side variables
+//others
 const gameDurationSec = 5
 
 //audio
@@ -69,7 +69,7 @@ function gameStopped(){
     playBtnGone();
     showPopUpReplay('you want to replay?');
     stopSound(bgSound)
-    playSound(alertSound)
+    playSound(alertSound)                                                                  
 }
 
 function finishgame(result){
@@ -89,7 +89,7 @@ function stopSound(sound){
     sound.pause()
 }
 
-function FieldHandlerEvent(event){
+function FieldHandlerEvent(event){                      
     console.log(event)
 
     if(!isstarted){ //started가 false면 실행하지 말아라
@@ -189,7 +189,7 @@ function playBtnGone(){
     flowerPlayBtn.style.visibility = 'hidden'
 }
 
-
+//game 초기화
 function initGame(){
     score=0 //reset
     field.innerHTML = ''; //reset
