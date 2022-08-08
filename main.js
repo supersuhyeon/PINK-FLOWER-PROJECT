@@ -210,7 +210,7 @@ function addItem(className,Count,imgSrc){
     const x2 = fieldSize.width - 80; //flowersize width 80px
     const y2 = fieldSize.height - 80; //flowersize height 80px
 
-    for (i = 0; i < Count; i++){
+    for (let i = 0; i < Count; i++){
         //each item need to be assigned on the position
         const item = document.createElement('img')
         item.setAttribute('class',className)
