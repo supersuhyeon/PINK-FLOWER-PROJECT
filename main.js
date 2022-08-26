@@ -1,7 +1,9 @@
 //field variables
 const field = document.querySelector('.flowergame_field')
 const fieldSize = field.getBoundingClientRect();
-const pinkflowerCount = 10
+const pinkFlowerCount = 10
+const purpleFlowerCount = 10
+const redFlowercount = 10
 
 //flower + popup variables
 const flowerPlayBtn = document.querySelector('.playbtn')
@@ -22,49 +24,48 @@ const gameWin = new Audio('/sound/win.mp3')
 const alertSound = new Audio('/sound/alert.wav')
 
 
-//게임의 상태를 알고있어야할 변수
-let isstarted = false; //whether game started or not 게임은 시작하지 않은단계에서 시작 초기값
-let score = 0; //점수 담을 공간
-let timer = ''; //timer 담을 공간
+//Game status
+let isstarted = false; //initial value
+let score = 0; 
+let timer = '';
 
-field.addEventListener('click', FieldHandlerEvent)
+//Game Main Title
+const h1El = document.querySelector('h1')
+h1El.innerText = `GET THE ${pinkFlowerCount} PINK FLOWERS`
 
+
+field.addEventListener('click', fieldHandlerEvent)
+
+//game popup button
 replayBtn.addEventListener('click', ()=>{
     gameStarted();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     hidePopUp();
 })
 
+//game start button
 flowerPlayBtn.addEventListener('click',()=>{
-    console.log('working!!')
-    
-
-    //total 2 functions needed to be called
 
     if (isstarted){
-        gameStopped(); //게임도중에 눌렀으면?
+        gameStopped();
     }else{ 
-        gameStarted(); //첫게임시작전 초기화면은?
+        gameStarted(); 
     }
-
-    // isstarted = !isstarted
 
 })
 
-//when game started, when gamestopped make each function
-//1)게임시작전 초기화면
+//1. when game started
 function gameStarted(){ 
-    isstarted = true; //게임이 시작하고있는상태에서 클릭을 누르면 멈춰야함 그래서 isstarted = true = gamestopped()
-    initGame();
-    changeStopBtn();
+    isstarted = true; 
+    initGame(); 
+    changeStopBtn(); 
     showTimerandScoreBtn();
     autoTimerStart();
     playSound(bgSound);
-    
 }
 
-//2)게임도중에 눌렀으면?
+//2. when game stopped 
 function gameStopped(){
-    isstarted = false; //게임이 멈춰진상태에서 클릭을 누르면 재생되어야함 그래서 isstarted = false = gamestarted()
+    isstarted = false; 
     autoTimerStop();
     playBtnGone();
     showPopUpReplay('you want to replay?');
@@ -72,12 +73,13 @@ function gameStopped(){
     playSound(alertSound)                                                                  
 }
 
-function finishgame(result){
+//3. the result of game
+function finishGame(result){
     isstarted = false;
     autoTimerStop();
     playBtnGone();
     stopSound(bgSound)
-    if(result){
+    if(result){  
         playSound(gameWin)
     }else{
         playSound(purpleflowerSound)
@@ -85,17 +87,12 @@ function finishgame(result){
     showPopUpReplay(result? 'YOU WON 😍' : 'YOU LOST 💩')
 }
 
-function stopSound(sound){
-    sound.pause()
-}
+// game on the field
+function fieldHandlerEvent(event){                      
 
-function FieldHandlerEvent(event){                      
-    console.log(event)
-
-    if(!isstarted){ //started가 false면 실행하지 말아라
+    if(!isstarted){ 
         return
     }
-
     const target = event.target
     if(target.classList.contains('pinkflower')){
         target.remove();
@@ -103,58 +100,41 @@ function FieldHandlerEvent(event){
         playSound(pinkflowerSound);
         remainingScoreBoard();
 
-        if(score === pinkflowerCount){
-            
-            finishgame(true)
+        if(score === pinkFlowerCount){
+            finishGame(true)
         }
-
-
     }else if(target.classList.contains('purpleflower')){
         playSound(purpleflowerSound);
-        finishgame(false);
+        finishGame(false);
     }else{
-        finishgame(false)
+        finishGame(false)
     }
 
-   
 }
 
-function playSound(sound){
-    sound.currentTime = 0;
-    sound.play();
-}
-
-function remainingScoreBoard(){
-    flowerScore.innerText = pinkflowerCount - score;
-}
-
-
+//pop up
 function showPopUpReplay(text){
     popup.style.display = 'block'
     popUpMessage.innerText = text;
-
 }
 
 function hidePopUp(){
     popup.style.display = 'none'
 }
 
-
+// game timer
 function autoTimerStart(){
 
     let currentSec = gameDurationSec
     updatetimertext(currentSec)
-   //const myInterval = setInterval(myFunction,2000); clearInterval(myInterval)
    timer = setInterval(()=>{
 
         if(currentSec<=0){
             clearInterval(timer)
-            finishgame(pinkflowerCount===score);
+            finishGame(pinkFlowerCount===score);
             return
         }
-
         updatetimertext(--currentSec)
-
    },1000) 
 
 }
@@ -169,36 +149,48 @@ function updatetimertext(sec){
     flowerTimer.innerText = `${minutes}:${seconds}`
 }
 
-
-function showTimerandScoreBtn(){
-    flowerTimer.style.visibility = 'visible';
-    flowerScore.style.visibility = 'visible';
-    
-
+// score board
+function remainingScoreBoard(){
+    flowerScore.innerText = pinkFlowerCount - score;
 }
 
+
+// game button 
 function changeStopBtn(){
     const popupBtn = flowerPlayBtn.querySelector('.fa-solid')
     popupBtn.classList.remove('fa-play')
     popupBtn.classList.add('fa-stop')
     flowerPlayBtn.style.visibility = 'visible'
-    
 }
 
 function playBtnGone(){
     flowerPlayBtn.style.visibility = 'hidden'
 }
 
-//game 초기화
+function showTimerandScoreBtn(){
+    flowerTimer.style.visibility = 'visible';
+    flowerScore.style.visibility = 'visible';
+}
+
+// game sound
+function playSound(sound){
+    sound.currentTime = 0;
+    sound.play();
+}
+
+function stopSound(sound){
+    sound.pause()
+}
+
+//game reset and new start
 function initGame(){
     score=0 //reset
     field.innerHTML = ''; //reset
-    flowerScore.innerText = pinkflowerCount //reset
+    flowerScore.innerText = pinkFlowerCount //reset
     //creat pink and purple flowers and appendchild to field
-
-    addItem('pinkflower',pinkflowerCount,'/img/pinkflower.png')
-    addItem('purpleflower',10,'/img/purpleflower.png')
-    addItem('redflower',10,'/img/redflower.png')
+    addItem('pinkflower',pinkFlowerCount,'/img/pinkflower.png')
+    addItem('purpleflower',purpleFlowerCount,'/img/purpleflower.png')
+    addItem('redflower',redFlowercount,'/img/redflower.png')
 
 }
 
